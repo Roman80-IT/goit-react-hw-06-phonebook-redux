@@ -14,7 +14,7 @@
 `package.json`
 
 ```jsx
-"homepage": "https://Roman80-IT.github.io/goit-react-hw-03-phonebook/",
+"homepage": "https://Roman80-IT.github.io/goit-react-hw-04-phonebook-nativ/",
 ```
 
 ### Усунення помилок при інсталяції
@@ -34,7 +34,31 @@ npm install @babel/plugin-transform-private-property-in-object --save-dev
 npm install @babel/plugin-transform-object-rest-spread --save-dev
 
 npm install svgo@2 --save-dev
+
+npm install source-map-resolve@latest
+
+npm install svgo@latest
 ```
+
+### Підключення нормалайзеру (найоптимальніший варіант)
+
+https://cdnjs.com/libraries/modern-normalize
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
+  integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+```
+
+вставимо код в **index.html**
+
+### Встановимо Styled Components:
+
+`npm install styled-components`
 
 # Виконання
 
