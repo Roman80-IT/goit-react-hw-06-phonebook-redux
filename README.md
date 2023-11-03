@@ -64,7 +64,14 @@ https://cdnjs.com/libraries/modern-normalize
 
 ### Встановимо Styled Components:
 
-`npm install styled-components`
+```
+npm install styled-components
+```
+
+```
+npm install redux react-redux
+npm install @redux-devtools/extension
+```
 
 # Виконання
 
