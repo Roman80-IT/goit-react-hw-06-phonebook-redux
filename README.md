@@ -40,6 +40,12 @@ npm install source-map-resolve@latest
 npm install svgo@latest
 ```
 
+### Інсталяція
+
+```
+npm install react-icons
+```
+
 ### Підключення нормалайзеру (найоптимальніший варіант)
 
 https://cdnjs.com/libraries/modern-normalize
