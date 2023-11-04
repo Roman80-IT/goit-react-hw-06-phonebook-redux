@@ -8,6 +8,8 @@ const INITIAL_STATE = {
     { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
   ],
   filter: '',
+  name: '',
+  number: '',
 };
 
 export const contactsOperationReducer = (state = INITIAL_STATE, action) => {
@@ -22,6 +24,28 @@ export const contactsOperationReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         filter: action.payload,
+      };
+    }
+    case 'contactsOperation/addContact': {
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
+      };
+    }
+    case 'contactsOperation/deleteContact': {
+      // action.payload - 1
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          contact => contact.id !== action.payload
+        ),
+      };
+    }
+    case 'contactsOperation/resetForm': {
+      return {
+        ...state,
+        name: '', // Нове поле
+        number: '', // Нове поле
       };
     }
 

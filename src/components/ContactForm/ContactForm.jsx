@@ -1,27 +1,10 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button } from './ContactForm.styled';
 
 export const ContactForm = ({ onSubmit, isNameHas }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const handleChange = ({ name, value }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const reset = () => {
-    setName('');
-    setNumber('');
-  };
+  const dispatch = useDispatch();
+  const name = useSelector(state => state.contactsOperation.name);
+  const number = useSelector(state => state.contactsOperation.number);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -36,9 +19,16 @@ export const ContactForm = ({ onSubmit, isNameHas }) => {
       number,
     };
 
-    onSubmit(data);
+    // Виклик дії для додавання контакту без використання окремих дій (actions)
+    dispatch({
+      type: 'contactsOperation/setContacts', // для збереження контакту
+      payload: data,
+    });
 
-    reset();
+    // скидання значень полів `name` та `number` в Redux-стейт після додавання контакту
+    dispatch({
+      type: 'contactsOperation/resetForm',
+    });
   };
 
   return (
@@ -49,10 +39,15 @@ export const ContactForm = ({ onSubmit, isNameHas }) => {
           type="text"
           name="name"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zAЗа-яА-Я]*)*$"
           required
           value={name}
-          onChange={event => handleChange(event.target)}
+          onChange={event =>
+            dispatch({
+              type: 'contactsOperation/setName',
+              payload: event.target.value,
+            })
+          } // Встановити ім'я в Redux-стейт
         />
       </label>
       <label>
@@ -64,7 +59,12 @@ export const ContactForm = ({ onSubmit, isNameHas }) => {
           pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
           required
           value={number}
-          onChange={event => handleChange(event.target)}
+          onChange={event =>
+            dispatch({
+              type: 'contactsOperation/setNumber',
+              payload: event.target.value,
+            })
+          } // Встановити номер в Redux-стейт
         />
       </label>
       <Button type="submit">Add contact</Button>
